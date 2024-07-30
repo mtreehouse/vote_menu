@@ -63,7 +63,7 @@ export default function Vote({ text, percentage, votes }) {
         >
           {percentage}%
         </progress>
-        <small className="text-slate-500">{votes} votes</small>
+        <small className="text-slate-500">{votes} 표</small>
       </label>
     </div>
   );
