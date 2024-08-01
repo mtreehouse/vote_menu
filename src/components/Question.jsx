@@ -12,19 +12,10 @@ export default function Question({ data }) {
     const formData = new FormData(e.target);
     const selectedVote = formData.get("vote");
 
-    if (selectedVote === data.answer_1) {
-      databases.updateDocument(DB_ID, COLLECTION_ID, data.$id, {
-        votes_1: data.votes_1 + 1,
-      });
-    } else if (selectedVote === data.answer_2) {
-      databases.updateDocument(DB_ID, COLLECTION_ID, data.$id, {
-        votes_2: data.votes_2 + 1,
-      });
-    } else if (selectedVote === data.answer_3) {
-      databases.updateDocument(DB_ID, COLLECTION_ID, data.$id, {
-        votes_3: data.votes_3 + 1,
-      });
-    }
+    const voteNum = selectedVote.replace("answer", "votes");
+    databases.updateDocument(DB_ID, COLLECTION_ID, data.$id, {
+      [voteNum]: data[voteNum] + 1,
+    });
 
     setIsSubmitted(true);
   }
@@ -49,6 +40,7 @@ export default function Question({ data }) {
               (data[answer.replace("answer", "votes")] / totalVotes) * 100
             )}
             votes={data[answer.replace("answer", "votes")]}
+            answerNum={answer}
           />
         ))}
 

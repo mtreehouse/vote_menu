@@ -38,9 +38,8 @@ progress::-webkit-progress-value {
 }
 
 .bottom-logo {
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  z-index: -999;
 }
 
 .setting-menu {

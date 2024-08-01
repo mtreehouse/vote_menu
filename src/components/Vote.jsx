@@ -1,12 +1,9 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Button, Card, CardBody, Image, Stack, Text } from "@chakra-ui/react";
 
-export default function Vote({ text, percentage, votes }) {
+export default function Vote({ text, percentage, votes, answerNum }) {
   const info = text.split("--");
-  const title = info[0];
-  const url = info[1];
-  const detail = info[2];
-  const image = info[3];
+  const [title, url, detail, image] = info;
 
   return (
     <div className="votes">
@@ -14,11 +11,11 @@ export default function Vote({ text, percentage, votes }) {
         className="appearance-none"
         type="radio"
         name="vote"
-        value={text}
-        id={text}
+        value={answerNum}
+        id={answerNum}
       />
       <label
-        htmlFor={text}
+        htmlFor={answerNum}
         className="bg-white block rounded border-4 border-transparent cursor-pointer shadow-lg p-6"
       >
         <div className="text-xl font-bold flex items-center justify-between">
