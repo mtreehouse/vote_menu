@@ -6,6 +6,13 @@
   --bg-green: #4ade80;
   --bg-red: #ef4444;
   --bg-blue: #3b82f6;
+  --bg-four: rgb(59, 150, 192);
+  --bg-five: #eea301;
+  --bg-six: #a10b12;
+  --bg-seven: #8efff6;
+  --bg-eight: #485a53;
+  --bg-nine: #c66cc9;
+  --bg-ten: #8b2e2e;
 }
 
 body {
@@ -22,6 +29,34 @@ body {
 
 .votes:nth-child(3) {
   --main-color: var(--bg-green);
+}
+
+.votes:nth-child(4) {
+  --main-color: var(--bg-four);
+}
+
+.votes:nth-child(5) {
+  --main-color: var(--bg-five);
+}
+
+.votes:nth-child(6) {
+  --main-color: var(--bg-six);
+}
+
+.votes:nth-child(7) {
+  --main-color: var(--bg-seven);
+}
+
+.votes:nth-child(8) {
+  --main-color: var(--bg-eight);
+}
+
+.votes:nth-child(9) {
+  --main-color: var(--bg-nine);
+}
+
+.votes:nth-child(10) {
+  --main-color: var(--bg-ten);
 }
 
 input:checked + label {

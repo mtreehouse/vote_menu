@@ -19,6 +19,11 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  Stack,
+  InputGroup,
+  InputLeftAddon,
+  Input,
+  NumberInput,
 } from "@chakra-ui/react";
 import { databases, DB_ID, COLLECTION_ID } from "../lib/appwrite";
 import { useRef } from "react";
@@ -33,22 +38,52 @@ function Setting({ data, hasAuth }) {
     } else {
       const isConfirm = confirm("투표를 초기화하시겠습니까?");
       if (isConfirm) {
-        databases.updateDocument(DB_ID, COLLECTION_ID, data[0].$id, {
-          votes_1: 0,
-          votes_2: 0,
-          votes_3: 0,
+        const votes = Object.keys(data[0]).filter((k) => k.includes("votes"));
+        const voteObj = {};
+        votes.forEach((vote) => {
+          voteObj[vote] = 0;
         });
+        databases.updateDocument(DB_ID, COLLECTION_ID, data[0].$id, voteObj);
       }
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const menuObj = {};
+    formData.forEach((value, key) => {
+      menuObj[key] = value;
+    });
+
+    databases.updateDocument(DB_ID, COLLECTION_ID, data[0].$id, menuObj);
   };
 
   const editMenu = (e) => {
     if (!hasAuth) {
       alert("권한이 없습니다.");
     } else {
+      const answers = Object.keys(data[0]).filter((k) => k.includes("answer"));
       modalData.current = {
         title: "메뉴 수정",
-        body: <>menu</>,
+        body: (
+          <>
+            {answers.map((answerName, idx) => (
+              <Stack spacing={4} key={idx}>
+                <InputGroup size="sm">
+                  <InputLeftAddon width={90}>{answerName}</InputLeftAddon>
+                  <Input
+                    name={answerName}
+                    defaultValue={data[0][answerName] || ""}
+                    title={data[0][answerName] || ""}
+                  />
+                </InputGroup>
+              </Stack>
+            ))}
+          </>
+        ),
+        hasSave: true,
       };
       onOpen(e);
     }
@@ -72,17 +107,26 @@ function Setting({ data, hasAuth }) {
 
   const CommonModal = () => {
     return (
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{modalData.current.title}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>{modalData.current.body}</ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              닫기
-            </Button>
-          </ModalFooter>
+          <form onSubmit={handleSubmit}>
+            <ModalHeader>{modalData.current.title}</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>{modalData.current.body}</ModalBody>
+            <ModalFooter>
+              {modalData.current.hasSave ? (
+                <Button type="submit" colorScheme="red" mr={3}>
+                  저장
+                </Button>
+              ) : (
+                false
+              )}
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                닫기
+              </Button>
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
     );
