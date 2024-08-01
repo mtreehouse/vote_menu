@@ -8,8 +8,6 @@ export default function Question({ data }) {
     (k) => k.includes("answer") && data[k]
   );
 
-  console.info(answers);
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -30,7 +28,6 @@ export default function Question({ data }) {
     (total, answer) => data[answer.replace("answer", "votes")] + total,
     0
   );
-  console.info(totalVotes);
 
   return (
     <>
