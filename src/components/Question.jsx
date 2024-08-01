@@ -30,7 +30,7 @@ export default function Question({ data }) {
   );
 
   return (
-    <>
+    <div className="main-body">
       <h2 className="text-3xl text-center font-bold">{data.text}</h2>
 
       <form
@@ -57,6 +57,6 @@ export default function Question({ data }) {
           제출
         </button>
       </form>
-    </>
+    </div>
   );
 }

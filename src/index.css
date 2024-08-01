@@ -15,8 +15,13 @@
   --bg-ten: #8b2e2e;
 }
 
-body {
-  background: #eeeff3;
+#root {
+  background-image: url("bg.png");
+  background-repeat: no-repeat;
+}
+
+.main-body {
+  margin-top: 80px;
 }
 
 .votes:nth-child(1) {
