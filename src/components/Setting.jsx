@@ -111,6 +111,8 @@ function Setting({ data, hasAuth }) {
         <>
           메뉴 선택 후 제출을 눌러주세요.
           <br />
+          투표 결과는 실시간으로 조회됩니다.
+          <br />
           <span style={{ color: "red", fontSize: "12px" }}>
             *취소는 불가합니다.
           </span>
