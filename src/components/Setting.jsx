@@ -1,4 +1,5 @@
 import {
+  ChatIcon,
   EditIcon,
   HamburgerIcon,
   InfoIcon,
@@ -58,6 +59,20 @@ function Setting({ data, hasAuth }) {
     });
 
     databases.updateDocument(DB_ID, COLLECTION_ID, data[0].$id, menuObj);
+    onClose();
+  };
+
+  const editTitle = (e) => {
+    if (!hasAuth) {
+      alert("권한이 없습니다.");
+    } else {
+      modalData.current = {
+        title: "타이틀 수정",
+        body: <Input name={"text"} defaultValue={data[0]["text"]} />,
+        hasSave: true,
+      };
+      onOpen(e);
+    }
   };
 
   const editMenu = (e) => {
@@ -148,6 +163,13 @@ function Setting({ data, hasAuth }) {
             {...(hasAuth ? { command: "★" } : {})}
           >
             투표 리셋
+          </MenuItem>
+          <MenuItem
+            icon={<ChatIcon />}
+            onClick={editTitle}
+            {...(hasAuth ? { command: "★" } : {})}
+          >
+            타이틀 수정
           </MenuItem>
           <MenuItem
             icon={<EditIcon />}
