@@ -4,6 +4,7 @@ import Vote from "./Vote";
 
 export default function Question({ data }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const answers = Object.keys(data).filter((val) => val.includes("answer"));
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,23 +41,16 @@ export default function Question({ data }) {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 votes-container"
       >
-        <Vote
-          text={data.answer_1}
-          percentage={Math.floor((data.votes_1 / totalVotes) * 100)}
-          votes={data.votes_1}
-        />
-
-        <Vote
-          text={data.answer_2}
-          percentage={Math.floor((data.votes_2 / totalVotes) * 100)}
-          votes={data.votes_2}
-        />
-
-        <Vote
-          text={data.answer_3}
-          percentage={Math.floor((data.votes_3 / totalVotes) * 100)}
-          votes={data.votes_3}
-        />
+        {answers.map((answer, idx) => (
+          <Vote
+            key={idx}
+            text={data[answer]}
+            percentage={Math.floor(
+              (data[answer.replace("answer", "votes")] / totalVotes) * 100
+            )}
+            votes={data[answer.replace("answer", "votes")]}
+          />
+        ))}
 
         <button
           type="submit"

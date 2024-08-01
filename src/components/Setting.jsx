@@ -43,10 +43,6 @@ function Setting({ data, hasAuth }) {
     }
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, []);
-
   return (
     <div className="setting-menu">
       <Menu>
