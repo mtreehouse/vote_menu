@@ -4,7 +4,11 @@ import Vote from "./Vote";
 
 export default function Question({ data }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const answers = Object.keys(data).filter((val) => val.includes("answer"));
+  const answers = Object.keys(data).filter(
+    (k) => k.includes("answer") && data[k]
+  );
+
+  console.info(answers);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -22,7 +26,11 @@ export default function Question({ data }) {
 
   if (!data) return null;
 
-  const totalVotes = data.votes_1 + data.votes_2 + data.votes_3;
+  const totalVotes = answers.reduce(
+    (total, answer) => data[answer.replace("answer", "votes")] + total,
+    0
+  );
+  console.info(totalVotes);
 
   return (
     <>
