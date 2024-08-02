@@ -115,6 +115,8 @@ function Setting({ data, hasAuth }) {
           <br />
           <span style={{ color: "red", fontSize: "12px" }}>
             *취소는 불가합니다.
+            <br />
+            *같은 메뉴 내 다른 식당 제안 가능
           </span>
         </>
       ),
