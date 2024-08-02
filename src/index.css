@@ -85,5 +85,5 @@ progress::-webkit-progress-value {
 .setting-menu {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
 }

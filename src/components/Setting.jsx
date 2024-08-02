@@ -156,9 +156,13 @@ function Setting({ data, hasAuth }) {
       <Menu>
         <MenuButton
           as={IconButton}
-          aria-label="Options"
-          icon={<HamburgerIcon />}
-          variant="outline"
+          borderRadius={"inherit"}
+          width={49}
+          height={50}
+          backgroundColor={"transparent"}
+          _hover={{ backgroundColor: "transparent" }}
+          _expanded={{ backgroundColor: "transparent" }}
+          _focus={{ backgroundColor: "transparent" }}
         />
         <MenuList>
           <MenuItem
