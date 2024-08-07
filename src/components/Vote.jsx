@@ -7,9 +7,12 @@ export default function Vote({
   votes,
   answerNum,
   isSubmitted,
+  hasAuth,
 }) {
   const info = text.split("--");
   const [title, url, detail, image] = info;
+
+  const handleOnClickVotes = (e) => {};
 
   return (
     <div className="votes">
@@ -19,6 +22,7 @@ export default function Vote({
         name="vote"
         value={answerNum}
         id={answerNum}
+        onChange={handleOnClickVotes}
       />
       <label
         htmlFor={answerNum}
@@ -57,9 +61,9 @@ export default function Vote({
             </Stack>
           </Card>
 
-          {isSubmitted && <span>{percentage || 0}%</span>}
+          {(hasAuth || isSubmitted) && <span>{percentage || 0}%</span>}
         </div>
-        {isSubmitted && (
+        {(hasAuth || isSubmitted) && (
           <>
             <progress
               className="w-full h-2 mt-4 rounded-lg [&::-webkit-progress-bar]:rounded-lg [&::-webkit-progress-value]:rounded-lg"

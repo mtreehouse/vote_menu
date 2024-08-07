@@ -48,7 +48,7 @@ function App() {
     <ChakraProvider>
       <main className="container max-w-3xl mx-auto px-4 py-10 d">
         {questions.map((question) => (
-          <Question key={question.$id} data={question} />
+          <Question key={question.$id} data={question} hasAuth={hasAuth} />
         ))}
       </main>
       <Setting data={questions} hasAuth={hasAuth} />

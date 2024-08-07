@@ -2,7 +2,7 @@ import { useState } from "react";
 import { databases, DB_ID, COLLECTION_ID } from "../lib/appwrite";
 import Vote from "./Vote";
 
-export default function Question({ data }) {
+export default function Question({ data, hasAuth }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const answers = Object.keys(data).filter(
     (k) => k.includes("answer") && data[k]
@@ -47,6 +47,7 @@ export default function Question({ data }) {
             votes={data[answer.replace("answer", "votes")]}
             answerNum={answer}
             isSubmitted={isSubmitted}
+            hasAuth={hasAuth}
           />
         ))}
 
