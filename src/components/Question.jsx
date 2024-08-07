@@ -46,6 +46,7 @@ export default function Question({ data }) {
             )}
             votes={data[answer.replace("answer", "votes")]}
             answerNum={answer}
+            isSubmitted={isSubmitted}
           />
         ))}
 

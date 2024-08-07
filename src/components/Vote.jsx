@@ -1,7 +1,13 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Button, Card, CardBody, Image, Stack, Text } from "@chakra-ui/react";
 
-export default function Vote({ text, percentage, votes, answerNum }) {
+export default function Vote({
+  text,
+  percentage,
+  votes,
+  answerNum,
+  isSubmitted,
+}) {
   const info = text.split("--");
   const [title, url, detail, image] = info;
 
@@ -51,16 +57,20 @@ export default function Vote({ text, percentage, votes, answerNum }) {
             </Stack>
           </Card>
 
-          <span>{percentage || 0}%</span>
+          {isSubmitted && <span>{percentage || 0}%</span>}
         </div>
-        <progress
-          className="w-full h-2 mt-4 rounded-lg [&::-webkit-progress-bar]:rounded-lg [&::-webkit-progress-value]:rounded-lg"
-          value={percentage || 0}
-          max="100"
-        >
-          {percentage}%
-        </progress>
-        <small className="text-slate-500">{votes} 표</small>
+        {isSubmitted && (
+          <>
+            <progress
+              className="w-full h-2 mt-4 rounded-lg [&::-webkit-progress-bar]:rounded-lg [&::-webkit-progress-value]:rounded-lg"
+              value={percentage || 0}
+              max="100"
+            >
+              {percentage}%
+            </progress>
+            <small className="text-slate-500">{votes} 표</small>
+          </>
+        )}
       </label>
     </div>
   );
